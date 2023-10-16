@@ -15,16 +15,16 @@
       Shortened URL:
       <span style="font-weight: bold; user-select: all">{{shortened}}</span>
     </p>
-    <p style="border: 1px #eee solid; padding: 5px">
+    <p style="border: 1px #eee solid; padding: 5px; word-break: break-all">
       Proceed to full URL &#10148; <a href="{{url}}" target="_blank">{{url}}</a>
     </p>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+    ></script>
     <script type="text/javascript">
-      new QRCode(
-        document.getElementById('qrcode'),
-        '{{shortened}}'
-      )
+      new QRCode(document.getElementById('qrcode'), '{{shortened}}')
     </script>
   </body>
 </html>
