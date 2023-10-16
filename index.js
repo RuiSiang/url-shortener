@@ -53,7 +53,7 @@ router.get(/^\/\_([a-kmnp-zA-HJ-NP-Z2-9]{4})/, (ctx, next) => {
   const token = ctx.url.slice(2)
   if (urlMap[token]) {
     console.log(ctx.request)
-    ctx.body = externalTemplate.replace(/\{\{shortened\}\}/g, `${ctx.host}_/${token} `).replace(/\{\{url\}\}/g, urlMap[token])
+    ctx.body = externalTemplate.replace(/\{\{shortened\}\}/g, `${ctx.host}/_${token} `).replace(/\{\{url\}\}/g, urlMap[token])
   }
 })
 
