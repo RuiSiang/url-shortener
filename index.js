@@ -2,6 +2,7 @@ const fs = require('fs-extra')
 const dotenv = require('dotenv')
 const path = require('path')
 const bodyParser = require('koa-bodyparser');
+const validator = require('validator')
 
 const Koa = require('koa')
 const Router = require('@koa/router')
@@ -33,10 +34,15 @@ const genRndStr = () => {
 
 router.post('/_', (ctx, next) => {
   if (ctx.request.body && ctx.request.body['auth'] && ctx.request.body['auth'] == process.env.AUTH) {
-    const rndStr = genRndStr()
-    urlMap[rndStr] = ctx.request.body['url']
-    fs.writeFileSync('urls.json', JSON.stringify(urlMap), { charset: 'utf-8' })
-    ctx.redirect(`/_${rndStr}`)
+    if (ctx.request.body['url'] && validator.isUrl(ctx.request.body['url'])) {
+      const rndStr = genRndStr()
+      urlMap[rndStr] = ctx.request.body['url']
+      fs.writeFileSync('urls.json', JSON.stringify(urlMap), { charset: 'utf-8' })
+      ctx.redirect(`/_${rndStr}`)
+    } else {
+      ctx.status = 401
+      ctx.body = 'Invalid URL'
+    }
   } else {
     ctx.status = 403
     ctx.body = 'Unauthorized'
