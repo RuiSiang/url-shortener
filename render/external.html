@@ -1,7 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>URL Shortener</title>
+  </head>
   <body>
     <h1>ATTENTION: External URL!!!</h1>
-    <p>Click the link to continue: <a href="{{url}}" target="_blank">{{url}}</a></p>
+    <div id="qrcode"></div>
+    <p style="padding: 5px">
+      Shortened URL:
+      <span style="font-weight: bold; user-select: all">{{shortened}}</span>
+    </p>
+    <p style="border: 1px #eee solid; padding: 5px">
+      Proceed to full URL &#10148; <a href="{{url}}" target="_blank">{{url}}</a>
+    </p>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script type="text/javascript">
+      new QRCode(
+        document.getElementById('qrcode'),
+        '{{shortened}}'
+      )
+    </script>
   </body>
 </html>
