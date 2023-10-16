@@ -34,7 +34,7 @@ const genRndStr = () => {
 
 router.post('/_', (ctx, next) => {
   if (ctx.request.body && ctx.request.body['auth'] && ctx.request.body['auth'] == process.env.AUTH) {
-    if (ctx.request.body['url'] && validator.isUrl(ctx.request.body['url'])) {
+    if (ctx.request.body['url'] && validator.isURL(ctx.request.body['url'])) {
       const rndStr = genRndStr()
       urlMap[rndStr] = ctx.request.body['url']
       fs.writeFileSync('urls.json', JSON.stringify(urlMap), { charset: 'utf-8' })
